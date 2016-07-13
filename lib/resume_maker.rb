@@ -1,5 +1,5 @@
-require 'user_io_handler'
-require 'plugin_handler'
+require_relative 'user_io_handler'
+require_relative 'plugin_handler'
 
 # Main class that controls the program
 class ResumeMaker
@@ -7,20 +7,32 @@ class ResumeMaker
   def initialize
     @io_handler = UserIOHandler.new
     @plugin_handler = PluginHandler.new
-
-    # @plugin_handler.load_plugins
+    @user_details = {}
   end
 
   def start
+    @plugin_handler.load_plugins
     loop do
-      clear_screen
-      # choice = display_main_menu_and_get_choice
+      @io_handler.clear_screen
+      choice = display_main_menu_and_get_choice
+      case choice
+      when 1
+        %(Name Age Place).split.each do |item|
+          @user_details[item] = @io_handler.ask_user_for(item)
+        end
+      when 2
+        format_choice = display_format_choice_menu_and_get_choice
+        @plugin_handler.current_format = format_choice
+      when 3
+        file_name = @io_handler.ask_user_for('file name')
+        @plugin_handler.export(@user_details, file_name)
+      end
     end
   end
 
   def display_main_menu_and_get_choice
     @io_handler.display_menu_and_get_choice(
-      %(Choose-Format Export Quit),
+      %(Enter-details Choose-Format Export Quit).split,
       'option'
     )
   end
