@@ -1,5 +1,6 @@
 require_relative 'user_io_handler'
 require_relative 'plugin_handler'
+require_relative 'user_details'
 
 # Main class that controls the program
 class ResumeMaker
@@ -26,6 +27,8 @@ class ResumeMaker
       when 3
         file_name = @io_handler.ask_user_for('file name')
         @plugin_handler.export(@user_details, file_name)
+      when 4
+        break
       end
     end
   end
