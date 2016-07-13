@@ -11,6 +11,10 @@ describe 'ResumeMaker' do
     expect(maker).to respond_to(:io_handler=).with(1)
   end
 
+  it 'can set a plugin_handler' do
+    expect(maker).to respond_to(:plugin_handler=).with(1)
+  end
+
   describe '#display_main_menu_and_get_choice' do
     it 'gets a user choice from the list of items supplied' do
       io_handler = instance_double('UserIOHandler')
@@ -27,6 +31,12 @@ describe 'ResumeMaker' do
   end
 
   describe '#display_format_choice_menu_and_get_choice' do
-    it 'displays the available formats and gets the user choice'
+    it 'displays the available formats and gets the user choice' do
+      plugin_loader = instance_double('pluginLoader')
+      allow(plugin_loader).to receive(:load_plugins)
+      allow(plugin_loader).to receive(:list_plugins).and_return(
+        %w(PDF CSV PlainText)
+      )
+    end
   end
 end
