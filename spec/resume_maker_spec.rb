@@ -19,7 +19,7 @@ describe 'ResumeMaker' do
     it 'gets a user choice from the list of items supplied' do
       io_handler = instance_double('UserIOHandler')
       allow(io_handler).to receive(:display_menu_and_get_choice).with(
-        kind_of(String),
+        kind_of(Array),
         kind_of(String)
       ).and_return(1, 2, 3)
       maker.io_handler = io_handler
