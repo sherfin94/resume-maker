@@ -23,7 +23,7 @@ class PluginHandler
   def load_plugins
     existing_classes = ObjectSpace.each_object(Class).to_a
     load_classes_from_folder(
-      '/Users/imac7/sherfin/ruby-learning/rSpec/resumeMaker/plugins'
+      './plugins'
     )
     new_classes = ObjectSpace.each_object(Class).to_a - existing_classes
 
