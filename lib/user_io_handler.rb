@@ -11,7 +11,7 @@ class UserIOHandler
     end
 
     print 'your option : '
-    Integer(gets) + 1
+    Integer(gets)
   end
 
   def ask_user_for(parameter)
