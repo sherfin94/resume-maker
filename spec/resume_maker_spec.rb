@@ -25,4 +25,8 @@ describe 'ResumeMaker' do
         .to eq(3)
     end
   end
+
+  describe '#display_format_choice_menu_and_get_choice' do
+    it 'displays the available formats and gets the user choice'
+  end
 end
