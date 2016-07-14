@@ -9,9 +9,9 @@ class PDFExporter < ResumeMakerPlugin
     attr_reader :output_format, :file_extension
   end
 
-  def self.export(user_details, file_name)
+  def self.export(user, file_name)
     pdf = Prawn::Document.new
-
+    user_details = user.to_hash
     user_details.each do |_key, value|
       pdf.text value, font_size: 72, justification: :center
     end

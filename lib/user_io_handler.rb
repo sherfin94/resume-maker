@@ -16,7 +16,7 @@ class UserIOHandler
 
   def ask_user_for(parameter)
     print "Enter #{parameter} : "
-    gets
+    gets.chomp
   end
 
   def clear_screen

@@ -1,4 +1,4 @@
-require_relative '../plugins/resume_maker_plugin'
+require_relative 'plugins/resume_maker_plugin'
 # Class for handling format plugins
 class PluginHandler
   attr_accessor :current_format
@@ -7,8 +7,8 @@ class PluginHandler
     @plugins = []
   end
 
-  def export(user_details, file_name)
-    @plugins[@current_format - 1].export(user_details, file_name)
+  def export(user, file_name)
+    @plugins[@current_format - 1].export(user, file_name)
   end
 
   def load_classes_from_folder(folder_name)
@@ -16,14 +16,14 @@ class PluginHandler
       entry =~ /.*\.rb/
     end
     files_in_folder.each do |file_name|
-      require_relative "#{folder_name}/#{file_name}"
+      require_relative "../#{folder_name}/#{file_name}"
     end
   end
 
   def load_plugins
     existing_classes = ObjectSpace.each_object(Class).to_a
     load_classes_from_folder(
-      './plugins'
+      'lib/plugins'
     )
     new_classes = ObjectSpace.each_object(Class).to_a - existing_classes
 
