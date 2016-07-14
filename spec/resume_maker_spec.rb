@@ -44,24 +44,31 @@ describe 'ResumeMaker' do
 
   # split this
   describe '#export' do
-    it 'asks io controller for filename and tells plugin_handler to export' do
-      io_handler = instance_double('UserIOHandler')
-      allow(io_handler).to receive(:ask_user_for).with(kind_of(String))
+    before(:example) do
+      @io_handler = instance_double('UserIOHandler')
+      allow(@io_handler).to receive(:ask_user_for).with(kind_of(String))
         .and_return('somename', 'someage', 'someplace', 'somefile')
-      plugin_handler = instance_double('pluginLoader')
-      allow(plugin_handler).to receive(:export).with(
-        kind_of(Array),
+      @plugin_handler = instance_double('pluginLoader')
+      allow(@plugin_handler).to receive(:export).with(
+        kind_of(User),
         kind_of(String)
       ).and_return('success')
+      maker.io_handler = @io_handler
+      maker.plugin_handler = @plugin_handler
 
-      maker.io_handler = io_handler
-      maker.plugin_handler = plugin_handler
-      expect(io_handler).to receive(:ask_user_for).with(kind_of(String))
-      expect(plugin_handler).to receive(:export).with(
-        kind_of(Array),
+      @result = maker.export
+    end
+    it 'asks io controller for filename' do
+      expect(@io_handler).to have_received(:ask_user_for).with(kind_of(String))
+    end
+    it 'tells plugin_handler to export' do
+      expect(@plugin_handler).to have_received(:export).with(
+        kind_of(User),
         kind_of(String)
       )
-      expect(maker.export).to eq('success')
+    end
+    it 'returns success ' do
+      expect(@result).to eq('success')
     end
   end
 end

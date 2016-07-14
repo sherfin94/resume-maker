@@ -25,8 +25,7 @@ class ResumeMaker
         format_choice = display_format_choice_menu_and_get_choice
         @plugin_handler.current_format = format_choice
       when 3
-        file_name = @io_handler.ask_user_for('file name')
-        @plugin_handler.export(@user, file_name)
+        export
       when 4
         break
       end
@@ -52,10 +51,7 @@ class ResumeMaker
   end
 
   def export
-    name = @io_handler.ask_user_for('Name')
-    age = @io_handler.ask_user_for('Age')
-    place = @io_handler.ask_user_for('Place')
-    file_name = @io_handler.ask_user_for('File name')
-    plugin_handler.export([name, age, place], file_name)
+    file_name = @io_handler.ask_user_for('file name')
+    @plugin_handler.export(@user, file_name)
   end
 end
