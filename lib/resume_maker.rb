@@ -1,6 +1,5 @@
 require_relative 'user_io_handler'
 require_relative 'plugin_handler'
-require_relative 'user_details'
 
 # Main class that controls the program
 class ResumeMaker
