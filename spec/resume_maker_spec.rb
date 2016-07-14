@@ -48,7 +48,7 @@ describe 'ResumeMaker' do
       @io_handler = instance_double('UserIOHandler')
       allow(@io_handler).to receive(:ask_user_for).with(kind_of(String))
         .and_return('somename', 'someage', 'someplace', 'somefile')
-      @plugin_handler = instance_double('pluginLoader')
+      @plugin_handler = instance_double('pluginHandler')
       allow(@plugin_handler).to receive(:export).with(
         kind_of(User),
         kind_of(String)
