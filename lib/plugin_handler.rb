@@ -20,10 +20,10 @@ class PluginHandler
     end
   end
 
-  def load_plugins
+  def load_plugins(folder_name)
     existing_classes = ObjectSpace.each_object(Class).to_a
     load_classes_from_folder(
-      'lib/plugins'
+      folder_name
     )
     new_classes = ObjectSpace.each_object(Class).to_a - existing_classes
 
