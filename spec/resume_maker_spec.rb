@@ -76,12 +76,16 @@ describe 'ResumeMaker' do
     before(:example) do
       @io_handler = instance_double('UserIOHandler')
       @plugin_handler = instance_double('PluginHandler')
+      allow(@io_handler).to receive(:clear_screen)
+      allow(@io_handler).to receive(:ask_user_for)
+      allow(@plugin_handler).to receive(:current_format=)
+      allow(@plugin_handler).to receive(:load_plugins)
+      allow(@plugin_handler).to receive(:list_plugins)
     end
     it 'obtains user details when option 1 is chosen' do
       allow(@io_handler).to receive(:display_menu_and_get_choice)
         .and_return(1, 4)
-      allow(@io_handler).to receive(:clear_screen)
-      allow(@io_handler).to receive(:ask_user_for)
+
       maker.io_handler = @io_handler
       maker.start
       expect(@io_handler).to have_received(:ask_user_for).with('Name')
@@ -89,11 +93,6 @@ describe 'ResumeMaker' do
     it 'sets plugin when option 2 is chosen' do
       allow(@io_handler).to receive(:display_menu_and_get_choice)
         .and_return(2, 4)
-      allow(@io_handler).to receive(:clear_screen)
-      allow(@io_handler).to receive(:ask_user_for)
-      allow(@plugin_handler).to receive(:current_format=)
-      allow(@plugin_handler).to receive(:load_plugins)
-      allow(@plugin_handler).to receive(:list_plugins)
       maker.io_handler = @io_handler
       maker.plugin_handler = @plugin_handler
       maker.start
@@ -103,10 +102,6 @@ describe 'ResumeMaker' do
     it 'asks plugin handler to export when option 3 is chosen' do
       allow(@io_handler).to receive(:display_menu_and_get_choice)
         .and_return(3, 4)
-      allow(@io_handler).to receive(:ask_user_for)
-      allow(@io_handler).to receive(:clear_screen)
-      allow(@plugin_handler).to receive(:load_plugins)
-      allow(@plugin_handler).to receive(:list_plugins)
       allow(@plugin_handler).to receive(:export)
         .with(kind_of(User), anything)
       maker.io_handler = @io_handler
