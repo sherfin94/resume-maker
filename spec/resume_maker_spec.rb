@@ -3,7 +3,6 @@ require 'resume_maker'
 describe 'ResumeMaker' do
   let(:maker) { ResumeMaker.new }
 
-
   it 'responds to the start call that starts the program' do
     expect(maker).to respond_to(:start)
   end
@@ -31,7 +30,7 @@ describe 'ResumeMaker' do
       io_handler = instance_double('UserIOHandler')
       allow(io_handler).to receive(:display_menu_and_get_choice)
         .and_return(1)
-      plugin_handler = instance_double('pluginLoader')
+      plugin_handler = instance_double('PluginHandler')
       allow(plugin_handler).to receive(:load_plugins)
       allow(plugin_handler).to receive(:list_plugins).and_return(
         %(PDF CSV PlainText)
@@ -43,6 +42,7 @@ describe 'ResumeMaker' do
     end
   end
 
+  # split this
   describe '#export' do
     it 'asks io controller for filename and tells plugin_handler to export' do
       io_handler = instance_double('UserIOHandler')

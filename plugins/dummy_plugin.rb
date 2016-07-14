@@ -6,7 +6,7 @@ class DummyPlugin < ResumeMakerPlugin
     attr_reader :output_format
   end
 
-  def self.export(user_details, file_name)
+  def self.export(_user_details, _file_name)
     'success'
   end
 end

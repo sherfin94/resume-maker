@@ -33,6 +33,6 @@ class PluginHandler
   end
 
   def list_plugins
-    @plugins.map {|plugin| plugin.output_format }
+    @plugins.map(&:output_format)
   end
 end
