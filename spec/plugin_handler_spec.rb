@@ -3,8 +3,8 @@ require 'plugin_handler'
 describe PluginHandler do
   let(:plugin_handler) { PluginHandler.new }
   describe '#load_plugins' do
-    it 'does not leave the plugin set empty' do
-      plugin_handler.load_plugins
+    it 'loads plugins from specified directory' do
+      plugin_handler.load_plugins('spec/dummy_plugins')
       expect(plugin_handler.list_plugins.length).not_to eq(0)
     end
   end
