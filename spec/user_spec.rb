@@ -12,8 +12,9 @@ describe User do
   it 'responds to to_hash' do
     expect(user).to respond_to(:to_hash)
   end
-  it 'resturns a hash when called to_hash' do
+  it 'resturns a hash with name, age, place when called to_hash' do
     the_hash = user.to_hash
     expect(the_hash).to be_a(Hash)
+    expect(the_hash.keys).to include(:name, :age, :place)
   end
 end
