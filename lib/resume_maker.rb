@@ -12,7 +12,7 @@ class ResumeMaker
   end
 
   def start
-    @plugin_handler.load_plugins
+    @plugin_handler.load_plugins('lib/plugins')
     loop do
       @io_handler.clear_screen
       choice = display_main_menu_and_get_choice
