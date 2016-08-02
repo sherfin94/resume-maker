@@ -18,10 +18,14 @@ describe 'ResumeMaker' do
   describe '#display_main_menu_and_get_choice' do
     it 'gets a user choice from the list of items supplied' do
       io_handler = instance_double('UserIOHandler')
-      allow(io_handler).to receive(:display_menu_and_get_choice).and_return(1)
+      allow(io_handler).to receive(:display_menu_and_get_choice).and_return(1,2,3)
       maker.io_handler = io_handler
       expect(maker.display_main_menu_and_get_choice)
         .to eq(1)
+      expect(maker.display_main_menu_and_get_choice)
+        .to eq(2)
+      expect(maker.display_main_menu_and_get_choice)
+        .to eq(3)
     end
   end
 
@@ -29,7 +33,7 @@ describe 'ResumeMaker' do
     it 'displays the available formats and gets the user choice' do
       io_handler = instance_double('UserIOHandler')
       allow(io_handler).to receive(:display_menu_and_get_choice)
-        .and_return(1)
+        .and_return(1,4,5)
       plugin_handler = instance_double('PluginHandler')
       allow(plugin_handler).to receive(:load_plugins)
       allow(plugin_handler).to receive(:list_plugins).and_return(
@@ -39,6 +43,8 @@ describe 'ResumeMaker' do
       maker.io_handler = io_handler
       maker.plugin_handler = plugin_handler
       expect(maker.display_format_choice_menu_and_get_choice).to eq(1)
+      expect(maker.display_format_choice_menu_and_get_choice).to eq(4)
+      expect(maker.display_format_choice_menu_and_get_choice).to eq(5)
     end
   end
 
