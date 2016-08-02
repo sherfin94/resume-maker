@@ -1,5 +1,5 @@
 require_relative 'resume_maker_plugin'
-require 'Prawn'
+require 'prawn'
 
 class PDFExporter < ResumeMakerPlugin
   @output_format = 'PDF'
